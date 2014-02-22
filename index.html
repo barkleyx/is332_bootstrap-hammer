@@ -107,11 +107,50 @@
 	  <div class="container theme-showcase" role="main">
 	
       <!-- Jumbotron Section -->
+	  <div id="container">
+	  <div class="hero-unit">
+      <div id="toucharea">
       <div class="jumbotron">
         <h1>Hello, world!</h1>
         <p>This is my test on the Jumbotron.</p>
+		<p>Tap on the Jumbotron for an action.</p>
         <p><a href="#" class="btn btn-primary btn-lg" role="button">Learn more &raquo;</a></p>
       </div>
+	  </div>
+	  </div>
+	  
+	<script src="js/vendor/hammer.js"></script>
+
+	<!-- Hammer Tap Event -->
+	
+	<script>
+    function highlight(el) {
+        setTimeout(function() {
+            el.className = el.className.replace("highlight", "");
+        }, 100);
+        el.className = el.className + " highlight";
+    }
+
+    var hammertime = Hammer(document.getElementById("toucharea"));
+    console.log(hammertime);
+
+    //The whole area
+    hammertime.on("tap swipeleft drag", function(ev) {
+        if(window.console) { console.log(ev); }
+        highlight(this);
+    });
+
+    //On elements in the toucharea, with a stopPropagation
+    hammertime.on("tap swipe", function(ev) {
+        if(window.console) { console.log('nested', ev); }
+        highlight(this);
+        ev.stopPropagation();
+    });
+	</script>
+
+	<script src="js/vendor/ga.js"></script>
+	
+	</div>
 
 	  <!-- Buttons Section -->
 	    <div class="page-header">
