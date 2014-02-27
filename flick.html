@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Hammer.js</title>
+    <link href="css/bootstrap-combined.min.css" rel="stylesheet">
+    <meta name="viewport" content="user-scalable=no, width=device-width, initial-scale=1, maximum-scale=1">
+    <style>
+
+        h1 {
+            margin: 30px;
+            text-align: center;
+        }
+
+        #playground {
+            position: absolute;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            left: 0;
+        }
+
+        .drag {
+            position: absolute;
+            left: 100px;
+            top: 100px;
+            background: #9fe1e7;
+            border-radius: 50px;
+            width: 100px;
+            height: 100px;
+        }
+
+        .drag1 { background: #42d692; }
+        .drag2 { background: #4986e7; }
+        .drag3 { background: #d06b64; }
+        .drag4 { background: #cd74e6; }
+        .drag5 { background: #9fe1e7; }
+
+    </style>
+	
+	<style>
+	#zoomwrapper {
+      height: 377px;
+      width: 600px;
+      overflow: hidden;
+ }
+ 
+.polaroid{
+		text-align: center;
+		padding: 10px 10px 25px 10px;
+		background: #eee;
+		border: 1px solid #fff;
+		-moz-box-shadow: 0px 2px 15px #333;
+		-webkit-box-shadow:	0px 2px 15px #333;
+		border: 1px solid #dfdfdf;
+    	border: 1px solid rgba(96,96,96,0.2);
+		font-family:”Imitation”;
+		font-size:24px;
+		color:#000;
+		padding-bottom:10px;
+		text-shadow:#333;
+}
+	</style>
+</head>
+
+<body>
+
+<h1>Drag the balls!</h1>
+
+<div id="container">
+    <div class="drag drag1"></div>
+    <div class="drag drag2"></div>
+    <div class="drag drag3"></div>
+    <div class="drag drag4"></div>
+    
+
+
+<div id=”zoomwrapper”>
+    <div class="drag drag5">	
+            <img src=”img/steam.jpg” alt=”” width=”531” height=”531” />
+            <span>Steam</span>
+        </div>
+		</div>
+    </div>
+	</div>
+</div>
+
+
+
+<script src="js/vendor/modernizr-2.7.1.min.js"></script>
+
+<script src="js/vendor/hammer.js"></script>
+
+<script>
+
+    var container = document.getElementById("container");
+    var hammertime = new Hammer(container, { drag_max_touches: 0 });
+    hammertime.on("touch drag", function(ev) {
+        var touches = ev.gesture.touches;
+
+        ev.gesture.preventDefault();
+
+        for(var t = 0, len = touches.length; t < len; t++) {
+            target = touches[t].target;
+            if(target.className.indexOf("drag") < 0) {
+                return;
+            }
+            target.style.left = (touches[t].pageX - 50) + "px";
+            target.style.top = (touches[t].pageY - 50) + "px";
+        }
+    });
+
+</script>
+<script src="js/vendor/ga.js"></script>
+</body>
+</html>
